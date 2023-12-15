@@ -8,7 +8,7 @@ The provided tests are more powerful than data splitting, which bases inference 
 
 ## Installation
 
-You can install the development version of PoSIAdjRSquared from
+You can install the PoSIAdjRSquared package from
 [GitHub](https://github.com/) with:
 
 ``` r
