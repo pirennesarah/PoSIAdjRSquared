@@ -1,6 +1,6 @@
 # PoSIAdjRSquared
 
-The goal of the package PoSIAdjRSquared is to allow users to calculate p-values and confidence intervals 
+The PoSIAdjRSquared package allows users to calculate p-values and confidence intervals 
 for regression coefficients after they have been selected by adjusted R squared in linear models. 
 The p-values and confidence intervals are valid after model selection with the same data. 
 This allows the user to use all data for both model selection and inference without losing control over the type I error rate. 
