@@ -26,7 +26,6 @@ similarly applicable to real data.
 ``` r
 library(PoSIAdjRSquared)
 
-## basic example code
   # Generate data
   n <- 100
   Data <- datagen.norm(seed = 7, n, p = 10, rho = 0, beta_vec = c(1,0.5,0,0.5,0,0,0,0,0,0))
@@ -68,3 +67,6 @@ library(PoSIAdjRSquared)
   compute_ci_with_specified_interval(z_interval, etaj, etajTy, Sigma, tn_mu = 0, alpha = 0.05)
 #> [1] -0.2394537  0.1111173
 ```
+
+## Reference
+Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared.
