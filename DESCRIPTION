@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Sarah", "Pirenne", "sarah.pirenne@kuleuven.be", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1787-2035"))
-    person("Gerda","Claeskens", email="gerda.claeskens@kuleuven.be", role=c("aut", "cre"))
+    person("Gerda","Claeskens", email="gerda.claeskens@kuleuven.be", role="aut")
 Description: This package conducts post-selection inference for regression coefficients in linear models after they have been selected by adjusted R squared. The p-values and confidence intervals are valid after model selection with the same data. This allows the user to use all data for both model selection and inference without losing control over the type I error rate. The provided tests are more powerful than data splitting, which bases inference on less data since it discards all information used for selection.
 License: MIT + file LICENSE
 Encoding: UTF-8
