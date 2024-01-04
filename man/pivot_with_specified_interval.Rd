@@ -28,7 +28,7 @@ pivot_with_specified_interval(z_interval, etaj, etajTy, tn_mu, tn_sigma)
 \value{The cumulative distribution function of a truncated gaussian distribution evaluated in the observed test statistic
 }
 \references{
-  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared.
+  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared Selection.
 }
 \examples{
   # Generate data
