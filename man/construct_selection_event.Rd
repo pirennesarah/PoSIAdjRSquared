@@ -41,7 +41,7 @@ construct_selection_event(a,b,R_M_k,kappa_M_k,R_M_phat,kappa_M_phat)
   }
 }
 \references{
-  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared.
+  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared Selection.
 }
 \keyword{htest}
 \keyword{models}
