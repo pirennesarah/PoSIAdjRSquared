@@ -1,5 +1,5 @@
 Package: PoSIAdjRSquared
-Title: Post-selection inference for adjusted R squared
+Title: Post-selection inference for adjusted R squared selection
 Version: 0.0.0.9000
 Authors@R: 
     c(person("Sarah", "Pirenne", "sarah.pirenne@kuleuven.be", role = c("aut", "cre"),
