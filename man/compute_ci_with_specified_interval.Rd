@@ -33,7 +33,7 @@
   }
 }
 \references{
-  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared.
+  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared Selection.
 }
 \examples{
   # Generate data
