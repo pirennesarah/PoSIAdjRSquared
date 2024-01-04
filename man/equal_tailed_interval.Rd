@@ -23,7 +23,7 @@ equal_tailed_interval(z_interval, etajTy, alpha, tn_mu, tn_sigma)
 This function inverts a post-selection p-value to a confidence interval.
 }
 \references{
-  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared.
+  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared Selection.
 }
 \examples{
 # Generate data
