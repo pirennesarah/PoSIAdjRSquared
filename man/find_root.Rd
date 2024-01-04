@@ -34,7 +34,7 @@ find_root(z_interval, etajTy, tn_sigma, y, lb, ub, tol=1e-6)
     Returns confidence interval bound
 }
 \references{
-  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared.
+  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared Selection.
 }
 \keyword{htest}
 \keyword{models}
