@@ -21,7 +21,7 @@ Function used internally by compute_ci_with_specified_interval for calculating v
 \value{The cumulative distribution function of a truncated gaussian distribution evaluated in the observed test statistic
 }
 \references{
-  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared.
+  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared Selection.
 }
 \keyword{htest}
 \keyword{models}
