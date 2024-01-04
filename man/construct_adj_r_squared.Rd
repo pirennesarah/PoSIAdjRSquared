@@ -28,7 +28,7 @@ construct_adj_r_squared(X, k, y, n, intercept = c(TRUE, FALSE), sst)
 This function computes the adjusted R squared and returns some useful matrices from this computation.
 }
 \references{
-  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared.
+  Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared Selection.
 }
 \examples{
 # Generate data
