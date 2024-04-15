@@ -69,4 +69,4 @@ library(PoSIAdjRSquared)
 ```
 
 ## Reference
-Pirenne, S. and Claeskens, G. (2024). Exact Post-Selection Inference for Adjusted R Squared Selection.
+Pirenne, S. and Claeskens, G. (2024). Exact post-selection inference for adjusted R squared selection. Statistics & Probability Letters. https://doi.org/10.1016/j.spl.2024.110133
