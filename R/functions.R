@@ -5,10 +5,11 @@
 #' @importFrom utils combn
 #' @importFrom lmf rmnorm
 #' @importFrom lmf inv
+#' @importFrom stats sd
 #' @import VGAM
 
 #' @export selective_inference
-selective_inference <- function(y, X, intercept=c(TRUE,FALSE), model_set = c("fit_all_subset_linear_models","fit_specified_size_subset_linear_models"), alpha, confidence_interval=c(TRUE,FALSE)){
+selective_inference <- function(y, X, intercept=c(TRUE,FALSE), model_set = c("fit_all_subset_linear_models","fit_specified_size_subset_linear_models"), alpha, confidence_interval=c(TRUE,FALSE), size=size){
   if(model_set == "fit_all_subset_linear_models"){
     result <- fit_all_subset_linear_models(y, X, intercept)
   } else if(model_set == "fit_specified_size_subset_linear_models"){
