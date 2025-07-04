@@ -6,15 +6,6 @@ The p-values and confidence intervals are valid after model selection with the s
 This allows the user to use all data for both model selection and inference without losing control over the type I error rate. 
 The provided tests are more powerful than data splitting, which bases inference on less data since it discards all information used for selection.
 
-## Installation
-
-You can install the PoSIAdjRSquared package directly in R:
-
-``` r
-install.packages("PoSIAdjRSquared")
-library(PoSIAdjRSquared)
-```
-
 ## Example
 
 This is a basic example which shows you how to calculate post-selection
@@ -24,46 +15,21 @@ similarly applicable to real data.
 ``` r
 library(PoSIAdjRSquared)
 
-  # Generate data
-  n <- 100
-  Data <- datagen.norm(seed = 7, n, p = 10, rho = 0, beta_vec = c(1,0.5,0,0.5,0,0,0,0,0,0))
-  X <- Data$X
-  y <- Data$y
+# Generate data
+Data <- datagen.norm(seed = 7, n = 100, p = 10, rho = 0, beta_vec = c(1,0.5,0,0.5,0,0,0,0,0,0))
+	X <- Data$X
+  	y <- Data$y
 
-  # Select model
-  result <- fit_all_subset_linear_models(y, X, intercept=FALSE)
-  phat <- result$phat
-  X_M_phat <- result$X_M_phat
-  k <- result$k
-  R_M_phat <- result$R_M_phat
-  kappa_M_phat <- result$kappa_M_phat
-  R_M_k <- result$R_M_k
-  kappa_M_k <- result$kappa_M_k
+selective_inference(y, X, intercept=FALSE, model_set = "fit_all_subset_linear_models", alpha=0.05, confidence_interval=TRUE)
 
-  # Estimate Sigma from residuals of full model
-  full_model <- lm(y ~ 0 + X)
-  sigma_hat <- sd(resid(full_model))
-  Sigma <- diag(n)*(sigma_hat)^2
-
-  # Construct test statistic
-  Construct_test <- construct_test_statistic(j = 5, X_M_phat, y, phat, Sigma, intercept=FALSE)
-  a <- Construct_test$a
-  b <- Construct_test$b
-  etaj <- Construct_test$etaj
-  etajTy <- Construct_test$etajTy
-
-  # Solve selection event
-  Solve <- solve_selection_event(a,b,R_M_k,kappa_M_k,R_M_phat,kappa_M_phat,k)
-  z_interval <- Solve$z_interval
-
-  # Post-selection p-value for beta_j=0
-  tn_sigma <- sqrt((t(etaj)%*%Sigma)%*%etaj)
-  postselp_value_specified_interval(z_interval, etaj, etajTy, tn_mu = 0, tn_sigma)
-#> [1] 0.8410427
-  
-  # Post-selection (1-alpha)% confidence interval
-  compute_ci_with_specified_interval(z_interval, etaj, etajTy, Sigma, tn_mu = 0, alpha = 0.05)
-#> [1] -0.2394537  0.1111173
+# $summary
+# Variable Coefficient  Std_Error     P_Value    CI_Lower  CI_Upper
+# 1        1   1.2550561 0.10171810 0.000000000  1.00651134 1.4543199
+# 2        2   0.3710123 0.10468937 0.322730857 -0.04019441 0.5530123
+# 3        4   0.3291952 0.09248687 0.001782217  0.12471371 0.5104508
+# 4        5  -0.1234033 0.10508632 0.841042743 -0.23945366 0.1111173
+# 5        8   0.1358987 0.09710654 0.548071861 -0.08495766 0.3009992
+# 6       10   0.1196511 0.09917412 0.997850742 -0.10880178 0.2263758
 ```
 
 ## Reference
