@@ -7,6 +7,89 @@
 #' @importFrom lmf inv
 #' @import VGAM
 
+#' @export selective_p_value
+selective_inference <- function(y, X, intercept=c(TRUE,FALSE), model_set = c("fit_all_subset_linear_models","fit_specified_size_subset_linear_models"), alpha, confidence_interval=c(TRUE,FALSE)){
+  if(model_set == "fit_all_subset_linear_models"){
+    result <- fit_all_subset_linear_models(y, X, intercept)
+  } else if(model_set == "fit_specified_size_subset_linear_models"){
+    result <- fit_specified_size_subset_linear_models(y, X, size, intercept)
+  } else {
+    stop("Invalid model_set option.")
+  }
+  phat <- result$phat
+  X_M_phat <- result$X_M_phat
+  k <- result$k
+  R_M_phat <- result$R_M_phat
+  kappa_M_phat <- result$kappa_M_phat
+  R_M_k <- result$R_M_k
+  kappa_M_k <- result$kappa_M_k
+
+  # Estimate Sigma from residuals of full model
+  full_model <- lm(y ~ 0 + X)
+  sigma_hat <- sd(resid(full_model))
+  n <- length(y)
+  Sigma <- diag(n)*(sigma_hat)^2
+
+  # Initialize result containers
+  coefficients <- numeric(length(phat))
+  standard_errors <- numeric(length(phat))
+  p_values <- numeric(length(phat))
+  lower_ci <- numeric(length(phat))
+  upper_ci <- numeric(length(phat))
+
+  # Loop through selected coefficients
+  for (i in seq_along(phat)) {
+    j <- phat[i]
+    Construct_test <- construct_test_statistic(j, X_M_phat, y, phat, Sigma, intercept)
+      a <- Construct_test$a
+      b <- Construct_test$b
+      etaj <- Construct_test$etaj
+      etajTy <- Construct_test$etajTy
+
+    # Solve selection event
+    Solve <- solve_selection_event(a,b,R_M_k,kappa_M_k,R_M_phat,kappa_M_phat,k)
+      z_interval <- Solve$z_interval
+
+    # Post-selection p-value for beta_j=0
+    tn_sigma <- sqrt((t(etaj)%*%Sigma)%*%etaj)
+    p_value <- postselp_value_specified_interval(z_interval, etaj, etajTy, tn_mu = 0, tn_sigma)
+
+    # Store results
+    coefficients[i] <- etajTy
+    standard_errors[i] <- tn_sigma
+    p_values[i] <- p_value
+
+    if (confidence_interval == TRUE) {
+      ci <- compute_ci_with_specified_interval(z_interval, etaj, etajTy, Sigma, tn_mu = 0, alpha = alpha)
+      lower_ci[i] <- ci[1]
+      upper_ci[i] <- ci[2]
+    } else {
+      lower_ci[i] <- NA
+      upper_ci[i] <- NA
+    }
+  }
+
+  # Build and print summary table
+  summary_table <- data.frame(
+    Variable = phat,
+    Coefficient = coefficients,
+    Std_Error = standard_errors,
+    P_Value = p_values,
+    CI_Lower = lower_ci,
+    CI_Upper = upper_ci
+  )
+
+  print(summary_table)
+
+  return(list(
+    selected_model = phat,
+    coefficients = coefficients,
+    standard_errors = standard_errors,
+    p_values = p_values,
+    confidence_intervals = Map(c, lower_ci, upper_ci),
+    summary = summary_table
+  ))
+}
 
 #' @export fit_all_subset_linear_models
 fit_all_subset_linear_models <- function(y, X, intercept=c(TRUE,FALSE)){
@@ -214,7 +297,7 @@ solve_selection_event <- function(a,b,R_M_k,kappa_M_k,R_M_phat,kappa_M_phat,k){
 
   while(i <= length(k)){
 
-    if(class(k[[i]])=="list"){ # If "fit_all_subset_linear_models" was used, we have to loop over two dimensions
+    if(inherits(k[[i]],"list",TRUE)){ # If "fit_all_subset_linear_models" was used, we have to loop over two dimensions
 
       j <- 1
 
