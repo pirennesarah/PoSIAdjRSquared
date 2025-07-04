@@ -7,7 +7,7 @@
 #' @importFrom lmf inv
 #' @import VGAM
 
-#' @export selective_p_value
+#' @export selective_inference
 selective_inference <- function(y, X, intercept=c(TRUE,FALSE), model_set = c("fit_all_subset_linear_models","fit_specified_size_subset_linear_models"), alpha, confidence_interval=c(TRUE,FALSE)){
   if(model_set == "fit_all_subset_linear_models"){
     result <- fit_all_subset_linear_models(y, X, intercept)
