@@ -5,7 +5,7 @@
   This function conducts selective inference for selected models by adjusted R squared. Selective p-values (and optionally, selective confidence intervals) are calculated.
 }
 \usage{
-  selective_inference(y, X, intercept, model_set, alpha, confidence_interval)
+  selective_inference(y, X, intercept, model_set, alpha, confidence_interval, size)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +26,9 @@
   }
   \item{confidence_interval}{
     Logical value: TRUE if selective confidence intervals should be calculated, FALSE if not
+  }
+  \item{size}{
+    Integer for specified size of selected model (number of coefficients). Use if model_set is "fit_specified_size_subset_linear_models".
   }
 }
 \value{
@@ -57,7 +60,8 @@
   	X <- Data$X
     	y <- Data$y
 
-  selective_inference(y, X, intercept=FALSE, model_set = "fit_all_subset_linear_models", alpha=0.05, confidence_interval=TRUE)
+  selective_inference(y, X, intercept=FALSE, model_set = "fit_all_subset_linear_models",
+                      alpha=0.05, confidence_interval=TRUE)
 
   # $summary
   # Variable Coefficient  Std_Error     P_Value    CI_Lower  CI_Upper
